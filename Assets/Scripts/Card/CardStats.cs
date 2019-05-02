@@ -4,20 +4,51 @@ using UnityEngine;
 
 public class CardStats : MonoBehaviour
 {
-    public int redChipsValue;
-    public int greenChipsValue;
     public int whiteChipsValue;
     public int blueChipsValue;
+    public int greenChipsValue;
+    public int redChipsValue;
     public int blackChipsValue;
 
-    public Color color;
+    public string color;
 
     public int pointValue;
 
-    //void onClick(){} kattintásra vagy felveszi a kártyát vagy visszautasítja a játékost
+    //kattintásra vagy felveszi a kártyát vagy visszautasítja a játékost
+    void onLeftClick()
+    {
+        if (checkPlayer())
+        {
+            //player.getCard
+        }
+    }
 
-    //void OnRightClick(){} foglalás, arany check. kihelyezni a saját deckbe. left click ugyanúgy mukődik rá. 
+    //foglalás, arany check. kihelyezni a saját deckbe. left click ugyanúgy mukődik rá. 
+    void OnRightClick()
+    {
 
+    }
+
+    public bool checkPlayer()
+    {
+        if (white)
+        {
+            if (blue)
+            {
+                if (green)
+                {
+                    if (red)
+                    {
+                        if (black)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
     //void onHover() ha a kurzor rajta van akkor kiírja az értékét
     
     // Start is called before the first frame update

@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class ChipStashService : MonoBehaviour
 {
-    public Color stashColor;
+    public string stashColor;
 
     public int stashNumber;
 
     //elvesz egyet a stashből
-    void OnLeftClick() { }
+    public void OnLeftClick()
+    {
+        if (stashNumber >= 1)
+        {
+            stashNumber--;
+            //player chip ++
+        }
+    }
 
     //elvesz kettőt a stashből, ha legalább kettő maradna a vétel után, következő játékos
-    void OnRigthClick()
+    public void OnRigthClick()
     {
         if (stashNumber - 2 >= 2)
         {
-            //itt átmegy a 2 chips a játékoshoz
+            stashNumber = stashNumber - 2;
+            //player chip = player chips + 2;
+            //endturn
         }
     }
 
