@@ -5,26 +5,85 @@ using UnityEngine;
 public class CameraClicking : MonoBehaviour
 {
 
+    int cardMask;
+    int chipMask;
+    float camRayLength = 100f;
+    CameraMovement cameraMovement;
+
+    private void Awake()
+    {
+        cardMask = LayerMask.GetMask("cardMask");
+        chipMask = LayerMask.GetMask("chipMask");
+        cameraMovement = gameObject.GetComponent<CameraMovement>();
+    }
+
     //kártyára leftclick
-    public void OnCardLeftClick(CardStats card)
+    public void OnCardLeftClick()
     {
-        card.checkPlayer();
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit cardHit;
+
+            if (Physics.Raycast(ray, out cardHit, camRayLength, cardMask))
+            {
+                cardHit.transform.GetComponent<CardStats>().OnLeftClick(cameraMovement.GetOnTurnPlayer());
+            }
+        }
     }
 
-    public void OnChipLeftClick(ChipStashService chipStash)
+    public void OnCardRightClick()
     {
-        chipStash.OnLeftClick();
+        //jobb klikkel foglalás
+        /*if (Input.GetMouseButtonDown(1))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit cardHit;
+
+            if (Physics.Raycast(ray, out cardHit, camRayLength, cardMask))
+            {
+                
+            }
+        }*/
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void OnChipLeftClick()
     {
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit chipHit;
+
+            if (Physics.Raycast(ray, out chipHit, camRayLength, chipMask))
+            {
+                chipHit.transform.GetComponent<ChipStashService>().OnLeftClick();
+            }
+        }
+    }
+
+    public void OnChipRightClick()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit chipHit;
+
+            if (Physics.Raycast(ray, out chipHit, camRayLength, chipMask))
+            {
+                chipHit.transform.GetComponent<ChipStashService>().OnRigthClick();
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        OnCardLeftClick();
+
+        //OnCardRightClick();
+
+        //OnChipLeftClick();
+
+        //OnChipRightClick();
     }
 }

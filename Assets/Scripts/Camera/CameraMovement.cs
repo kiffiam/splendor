@@ -5,28 +5,60 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
 
-    public int PlayerOnTurn;
+    public int OnTurnPlayerId = 0;
+
+    public GameObject[] players;
+
+    //public Transform target;
+
+    private Animator cameraAnimationAC { get; set; }
+
+    private float speed = 2.0f;
+
+    public void SetNextPlayerId()
+    {
+        if (OnTurnPlayerId != 3)
+        {
+            OnTurnPlayerId++;
+        }
+        else
+        {
+            OnTurnPlayerId = 0;
+        }
+    }
 
     public void MoveToNextPlayer()
     {
-        //animacio
-        //current player = nextplayer;
+        cameraAnimationAC.SetTrigger("PlayerTurnEnd");
+        SetNextPlayerId();
+
     }
 
-    //movetoplayer 1 
-    //movetoplayer 2
-    //movetoplayer 3
-    //movetoplayer 4
-
-    // Start is called before the first frame update
-    void Start()
+    public PlayerService GetOnTurnPlayer()
     {
+        return players[OnTurnPlayerId].GetComponent<PlayerService>();
+    }
+
+    private void Awake()
+    {
+        cameraAnimationAC = gameObject.GetComponent<Animator>();
         
     }
+    
+    
 
     // Update is called once per frame
     void Update()
     {
-        
+        /*if (Input.GetKey(KeyCode.UpArrow))
+        {
+            transform.RotateAround(target.position, Vector3.up, 10);
+            //transform.Rotate();
+        }*/
+
+        /*if (Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.position += Vector3.right * speed * Time.deltaTime;
+        }*/
     }
 }
