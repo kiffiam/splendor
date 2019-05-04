@@ -15,6 +15,8 @@ public class CardStats : MonoBehaviour
 
     public int pointValue;
 
+    public PlayerService bookedBy;
+
     private void Awake()
     {
         color = name.Substring(1, 3);
@@ -31,20 +33,29 @@ public class CardStats : MonoBehaviour
     //kattintásra vagy felveszi a kártyát vagy visszautasítja a játékost
     public void OnLeftClick(PlayerService player)
     {
+        if (player.pickingChips)
+        {
+            print("Can't buy card and pick chips in the same turn, continue looting!");
+            return;
+        }
         if (CheckPlayer(player))
         {
             player.GetCard(this.GetComponent<CardStats>());
+            //animácio
         }
         else
         {
-            print("insufficunt funds");
+            print("Not enough chips to buy this card!");
         }
     }
 
     //foglalás, arany check. kihelyezni a saját deckbe. left click ugyanúgy mukődik rá. 
-    public void OnRightClick()
+    public void OnRightClick(PlayerService player)
     {
+        bookedBy = player;
+        player.BookCard();
 
+        //anim a playerhez, zseton a kártyára
     }
 
     public bool CheckPlayer(PlayerService player)

@@ -27,7 +27,9 @@ public class CameraClicking : MonoBehaviour
 
             if (Physics.Raycast(ray, out cardHit, camRayLength, cardMask))
             {
+
                 cardHit.transform.GetComponent<CardStats>().OnLeftClick(cameraMovement.GetOnTurnPlayer());
+             
             }
         }
     }
@@ -56,7 +58,15 @@ public class CameraClicking : MonoBehaviour
 
             if (Physics.Raycast(ray, out chipHit, camRayLength, chipMask))
             {
-                chipHit.transform.GetComponent<ChipStashService>().OnLeftClick();
+                if (!cameraMovement.GetOnTurnPlayer().chipsTaken.Contains(chipHit.transform.GetComponent<ChipStashService>().stashColor))
+                {
+                    chipHit.transform.GetComponent<ChipStashService>().OnLeftClick(cameraMovement.GetOnTurnPlayer());
+                }
+                else
+                {
+                    print("Already took one from this color!");
+                }
+
             }
         }
     }
@@ -70,8 +80,16 @@ public class CameraClicking : MonoBehaviour
 
             if (Physics.Raycast(ray, out chipHit, camRayLength, chipMask))
             {
-                chipHit.transform.GetComponent<ChipStashService>().OnRigthClick();
+                if (chipHit.transform.GetComponent<ChipStashService>().stashColor != "GOL")
+                {
+                    chipHit.transform.GetComponent<ChipStashService>().OnRigthClick(cameraMovement.GetOnTurnPlayer());
+                }
+                else
+                {
+                    print("Can't take two from the Gold chips!");
+                }
             }
+            
         }
     }
 
@@ -82,8 +100,8 @@ public class CameraClicking : MonoBehaviour
 
         //OnCardRightClick();
 
-        //OnChipLeftClick();
+        OnChipLeftClick();
 
-        //OnChipRightClick();
+        OnChipRightClick();
     }
 }

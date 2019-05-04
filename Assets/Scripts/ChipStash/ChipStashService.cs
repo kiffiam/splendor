@@ -8,33 +8,51 @@ public class ChipStashService : MonoBehaviour
 
     public int stashNumber;
 
+    private void Awake()
+    {
+        stashColor = gameObject.name.Substring(0, 3);
+        if (stashColor == "GOL")
+        {
+            stashNumber = 5;
+        }
+        else { stashNumber = 7; }
+        
+    }
+
     //elvesz egyet a stashből
-    public void OnLeftClick()
+    public void OnLeftClick(PlayerService player)
     {
         if (stashNumber >= 1)
         {
             stashNumber--;
-            //player chip ++
+            player.GetChip(stashColor);
+            
+        }
+        else
+        {
+            print("Not enough chips in the stash!");
         }
     }
 
     //elvesz kettőt a stashből, ha legalább kettő maradna a vétel után, következő játékos
-    public void OnRigthClick()
+    public void OnRigthClick(PlayerService player)
     {
         if (stashNumber - 2 >= 2)
         {
             stashNumber = stashNumber - 2;
-            //player chip = player chips + 2;
-            //endturn
+            player.GetTwoChips(stashColor);
+        }
+        else
+        {
+            print("Not enough chips in the stash!");
         }
     }
 
-
-    // Start is called before the first frame update
-    void Start()
+    public void IncreaseStashNumber(int chipNumber)
     {
-        
+        stashNumber = stashNumber + chipNumber;
     }
+
 
     // Update is called once per frame
     void Update()
