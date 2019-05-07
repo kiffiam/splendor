@@ -170,17 +170,8 @@ public class PlayerService : MonoBehaviour
                 blackChips++;
                 break;
             case "GOL":
-                if (chipsTaken.Count == 0)
-                {
-                    goldChips++;
-                    EndTurn();
-                }
-                else
-                {
-                    print("Can't get colored and gold chips in the same turn!");
+                    print("Book a card with right click to earn a gold chip!");
                     return;
-                }
-                break;
             default:
                 break;
         }
@@ -200,9 +191,8 @@ public class PlayerService : MonoBehaviour
 
     public void BookCard()
     {
-        goldChips--;
-
-        //ez nem kell ide mert a kártyára megy majd vétel után kerul a stashbe
-        //chipStashes.Find(s => s.stashColor == "GOL").IncreaseStashNumber(1);
+        goldChips++;
+        chipStashes.Find(c => c.stashColor == "GOL").DecreaseStashNumber(1);
+        EndTurn();
     }
 }

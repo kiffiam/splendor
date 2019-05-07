@@ -17,6 +17,8 @@ public class CardStats : MonoBehaviour
 
     public PlayerService bookedBy;
 
+    public bool isBooked = false;
+
     private void Awake()
     {
         color = name.Substring(1, 3);
@@ -38,24 +40,34 @@ public class CardStats : MonoBehaviour
             print("Can't buy card and pick chips in the same turn, continue looting!");
             return;
         }
-        if (CheckPlayer(player))
+    
+        if (!isPlayerBookedMe(player) && isBooked)
         {
-            player.GetCard(this.GetComponent<CardStats>());
-            //animácio
+            print("Someone else has booked this card!");
+            return;
         }
-        else
+
+        if (!CheckPlayer(player))
         {
             print("Not enough chips to buy this card!");
+            return;
         }
+        
+        player.GetCard(this.GetComponent<CardStats>());
     }
 
     //foglalás, arany check. kihelyezni a saját deckbe. left click ugyanúgy mukődik rá. 
     public void OnRightClick(PlayerService player)
     {
+        if (isBooked)
+        {
+            print("Someone has already booked this card!");
+            return;
+        }
+        isBooked = true;
         bookedBy = player;
         player.BookCard();
-
-        //anim a playerhez, zseton a kártyára
+        //anim a playerhez, arany zseton a playerhez
     }
 
     public bool CheckPlayer(PlayerService player)
@@ -70,6 +82,18 @@ public class CardStats : MonoBehaviour
         }
         else { return false; }
         
+    }
+
+    public bool isPlayerBookedMe(PlayerService player)
+    {
+        if (bookedBy == player)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 

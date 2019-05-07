@@ -36,8 +36,8 @@ public class CameraClicking : MonoBehaviour
 
     public void OnCardRightClick()
     {
-        //jobb klikkel foglalás
-        /*if (Input.GetMouseButtonDown(1))
+        //jobb klikkel foglalás, owner beállitás, kártya odakerülés, egy arany zseton elvétel
+        if (Input.GetMouseButtonDown(1))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit cardHit;
@@ -45,8 +45,9 @@ public class CameraClicking : MonoBehaviour
             if (Physics.Raycast(ray, out cardHit, camRayLength, cardMask))
             {
                 
+                cardHit.transform.GetComponent<CardStats>().OnRightClick(cameraMovement.GetOnTurnPlayer());
             }
-        }*/
+        }
     }
 
     public void OnChipLeftClick()
@@ -86,7 +87,7 @@ public class CameraClicking : MonoBehaviour
                 }
                 else
                 {
-                    print("Can't take two from the Gold chips!");
+                    print("Can't take two from the Gold chips! Book a card with right click to get one!");
                 }
             }
             
@@ -98,7 +99,7 @@ public class CameraClicking : MonoBehaviour
     {
         OnCardLeftClick();
 
-        //OnCardRightClick();
+        OnCardRightClick();
 
         OnChipLeftClick();
 

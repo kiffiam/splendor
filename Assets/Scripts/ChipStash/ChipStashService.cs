@@ -5,8 +5,10 @@ using UnityEngine;
 public class ChipStashService : MonoBehaviour
 {
     public string stashColor;
-
     public int stashNumber;
+
+
+
 
     private void Awake()
     {
@@ -53,6 +55,18 @@ public class ChipStashService : MonoBehaviour
         stashNumber = stashNumber + chipNumber;
     }
 
+    public void DecreaseStashNumber(int chipNumber)
+    {
+        if (chipNumber >= stashNumber)
+        {
+            stashNumber = 0;
+        }
+        else
+        {
+            stashNumber = stashNumber - chipNumber;
+        }
+        
+    }
 
     // Update is called once per frame
     void Update()
