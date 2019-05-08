@@ -39,6 +39,22 @@ public class CameraMovement : MonoBehaviour
         return players[OnTurnPlayerId].GetComponent<PlayerService>();
     }
 
+    public void LookAtCards()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow)/* && (cameraAnimationAC.GetBool("LookAtCards")== false)*/)
+        {
+            cameraAnimationAC.SetBool("LookAtCards", true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            cameraAnimationAC.SetBool("LookAtCards", false);
+        }
+       
+
+
+    }
+
     private void Awake()
     {
         cameraAnimationAC = gameObject.GetComponent<Animator>();
@@ -50,11 +66,7 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.GetKey(KeyCode.UpArrow))
-        {
-            transform.RotateAround(target.position, Vector3.up, 10);
-            //transform.Rotate();
-        }*/
+        LookAtCards();
 
         /*if (Input.GetKey(KeyCode.RightArrow))
         {

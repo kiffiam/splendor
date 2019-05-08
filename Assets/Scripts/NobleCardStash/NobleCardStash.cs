@@ -8,6 +8,7 @@ public class NobleCardManager : MonoBehaviour
 
     public int nobleCardNumber;
     public List<GameObject> nobleCards;
+    public Transform[] spawnPoints;
 
     private void Awake()
     {
@@ -28,7 +29,7 @@ public class NobleCardManager : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            Instantiate(nobleCards[i], transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+            Instantiate(nobleCards[i], spawnPoints[i].position, Quaternion.Euler(new Vector3(0, 0, 0)));
             //más helyekre kell őket rakosgatni,positiont változtatni kell
 
         }
