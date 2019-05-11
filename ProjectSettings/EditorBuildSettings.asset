@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/TableScene.unity
+    guid: 65803b857d6f6614f802989fba06588e
   m_configObjects: {}

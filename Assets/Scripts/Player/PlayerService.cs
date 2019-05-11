@@ -6,15 +6,35 @@ using UnityEngine;
 public class PlayerService : MonoBehaviour
 {
     bool isOnTurn = false;
+
     CameraMovement cameraMovement;
 
+    public CardManager cardManager;
+
     List<ChipStashService> chipStashes;
+
+    public Transform[] nobleCardPlacingPoints;
+
+    public Transform[] whiteCardPlacingPoints;
+    public Transform[] blueCardPlacingPoints;
+    public Transform[] greenCardPlacingPoints;
+    public Transform[] redCardPlacingPoints;
+    public Transform[] blackCardPlacingPoints;
+
+    public Transform[] bookedCardPlacingPoints;
+
+    public Transform[] whiteChipsPlacingPoints;
+    public Transform[] blueChipsPlacingPoints;
+    public Transform[] greenChipsPlacingPoints;
+    public Transform[] redChipsPlacingPoints;
+    public Transform[] blackChipsPlacingPoints;
+    public Transform[] goldChipsPlacingPoints;
+
+    public List<string> chipsTaken;
 
     public int points = 0;
 
     public int chipsToTake = 3;
-
-    public List<string> chipsTaken;
 
     public int whiteChips = 0;
     public int blueChips = 0;
@@ -23,17 +43,29 @@ public class PlayerService : MonoBehaviour
     public int blackChips = 0;
     public int goldChips = 0;
 
-    public int whiteCardNumber;
-    public int blueCardNumber;
-    public int greenCardNumber;
-    public int redCardNumber;
-    public int blackCardNumber;
+    public int whiteCardNumber = 0;
+    public int blueCardNumber = 0;
+    public int greenCardNumber = 0;
+    public int redCardNumber = 0;
+    public int blackCardNumber = 0;
+
+    public int bookedCardsNumber = 0;
+
+    public int nobleCards = 0;
+
+    public NobleCardStash nobleCardStash;
 
     public bool pickingChips = false;
+
+
 
     private void Awake()
     {
         cameraMovement = Camera.main.GetComponent<CameraMovement>();
+
+        
+
+        nobleCardStash = (NobleCardStash)FindObjectOfType(typeof(NobleCardStash));
 
         whiteChips = 4; //for testing
         blueChips = 4;
@@ -90,6 +122,11 @@ public class PlayerService : MonoBehaviour
 
     public void GetCard(CardStats card)
     {
+        if (card.isBooked)
+        {
+            bookedCardsNumber--;
+        }
+
         whiteChips = whiteChips - card.whiteChipsValue;
         blueChips = blueChips - card.blueChipsValue;
         greenChips = greenChips - card.greenChipsValue;
@@ -101,6 +138,12 @@ public class PlayerService : MonoBehaviour
         AddPoint(card.pointValue);
 
         AddCardGem(card.color);
+
+        card.MoveToPlayer(this);
+
+        cardManager.PlaceCard(card.gameObject);
+
+        nobleCardStash.CheckPlayerCardValues(this);
 
         EndTurn();
     }
@@ -189,10 +232,22 @@ public class PlayerService : MonoBehaviour
 
     }
 
-    public void BookCard()
+    public void BookCard(CardStats card)
     {
+        card.MoveToPlayerBooks(this);
+
+        cardManager.PlaceCard(card.gameObject);
+
         goldChips++;
+        bookedCardsNumber++;
         chipStashes.Find(c => c.stashColor == "GOL").DecreaseStashNumber(1);
         EndTurn();
+    }
+
+    public void GetNobleCard(NobleCardStats nobleCard)
+    {
+        points = points + nobleCard.pointValue;
+        nobleCard.MoveToPlayer(this);
+        nobleCards++;
     }
 }

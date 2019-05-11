@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7159413437438756336}
   - component: {fileID: 68726652905639206}
   - component: {fileID: 1555536768604573237}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: 1RED002100
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,13 +109,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb31f1f332f2ecb4c892ad8b3b72040c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redChipsValue: 1
-  greenChipsValue: 0
   whiteChipsValue: 2
   blueChipsValue: 2
+  greenChipsValue: 0
+  redChipsValue: 1
   blackChipsValue: 0
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: 
   pointValue: 0
+  bookedBy: {fileID: 0}
+  isBooked: 0
 --- !u!65 &1555536768604573237
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -141,7 +143,7 @@ GameObject:
   - component: {fileID: 8193064281653590690}
   - component: {fileID: 4792790667973325225}
   - component: {fileID: 854287181593994456}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CardTestObjPlaneBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

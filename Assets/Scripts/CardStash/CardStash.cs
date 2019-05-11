@@ -6,20 +6,32 @@ using UnityEngine;
 public class CardStash : MonoBehaviour
 {
     public int cardNumber;
-    public List<GameObject> cards;
+    public List<GameObject> cardPrefabs;
+    public List<GameObject> cardsInStash;
     public string lvl;
-
+    public Transform CardBaseSpawnPoint;
+    private float placeTime = 1f;
+    Vector3 current;
+    
     private void Awake()
     {
+        current = CardBaseSpawnPoint.transform.position;
+
         lvl = name.Substring(3, 1);
+
         var notRandomizedCards = new List<GameObject>(Resources.LoadAll<GameObject>("Prefabs/lvl" + lvl + "Prefabs"));
-        cards = new List<GameObject>(ShuffleCards(notRandomizedCards));
+        cardPrefabs = new List<GameObject>(ShuffleCards(notRandomizedCards));
 
-        //cards = new List<GameObject>(Resources.LoadAll<GameObject>("Prefabs/lvl" + lvl + "Prefabs"));
-
-        cardNumber = cards.Count;
+        PlaceCardStashOnTable();
+        //PlaceStartingCards();
+        for (int i = 0; i < 4; i++)
+        {
+            Invoke("PlaceStartingCards", placeTime);
+            placeTime += 3f;
+        }
         
-        PlaceCardsOnTable();
+        
+        cardNumber = cardsInStash.Count;
     }
 
     public List<GameObject> ShuffleCards(List<GameObject> notRandomizedCards)
@@ -28,30 +40,40 @@ public class CardStash : MonoBehaviour
         return shuffledcards;
     }
 
-    //called in awake
-    public void PlaceCardsOnTable()
+    public void PlaceCardStashOnTable()
     {
-        foreach (var card in cards)
+        foreach (var card in cardPrefabs)
         {
-            Instantiate(card, transform.position, Quaternion.Euler(new Vector3(0, 0, 180)));
+            cardsInStash.Add(Instantiate(card, transform.position, Quaternion.Euler(new Vector3(0, 0, 180))));
         }
-        
-    }
-
-    //called by cards which is being picked up
-    public void PlaceCard(Vector3 cardPlace)
-    {
-
     }
 
     public void PlaceStartingCards()
     {
+        
+        //for (int i = 0; i < 4; i++)
+        //{
 
+            
+            CardBaseSpawnPoint.position = current;
+            
+            cardsInStash[0].GetComponent<CardStats>().MoveToTable(CardBaseSpawnPoint);
+            current.x += 0.65f;
+            //original.x += 0.65f;
+            cardsInStash.RemoveAt(0);
+            //repeatTime = 0;
+            //timer = 0;
+            //Instantiate(cardPrefabs[i], current, Quaternion.Euler(new Vector3(0, 0, 0)));
+            //current.x += 0.65f;
+        //}
+        //cardsInStash.RemoveRange(0,4);
     }
+
+    
 
     // Update is called once per frame
     void Update()
     {
-        
+        //timer += Time.deltaTime;
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8960349680009216198}
   - component: {fileID: 4502874388312104264}
   - component: {fileID: 3391709423139805908}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CardTestObjPlaneBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 1412955947598998035}
   - component: {fileID: 8169866417311171756}
   - component: {fileID: 5760265941312950725}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: 1RED030000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,6 +209,7 @@ MonoBehaviour:
   color: 
   pointValue: 0
   bookedBy: {fileID: 0}
+  isBooked: 0
 --- !u!65 &5760265941312950725
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -11,6 +11,8 @@ public class CardStats : MonoBehaviour
     public int redChipsValue;
     public int blackChipsValue;
 
+    public int lvl;
+
     public string color;
 
     public int pointValue;
@@ -19,9 +21,17 @@ public class CardStats : MonoBehaviour
 
     public bool isBooked = false;
 
+    Vector3 targetPos;
+    Quaternion targetRot;
+    private bool enabledToMove;
+    private float timer = 0;
+    private float timerEnd = 3f;
+
     private void Awake()
     {
         color = name.Substring(1, 3);
+
+        lvl = int.Parse(name.Substring(0, 1));
 
         pointValue = int.Parse(name.Substring(4, 1));
 
@@ -53,7 +63,7 @@ public class CardStats : MonoBehaviour
             return;
         }
         
-        player.GetCard(this.GetComponent<CardStats>());
+        player.GetCard(GetComponent<CardStats>());
     }
 
     //foglalás, arany check. kihelyezni a saját deckbe. left click ugyanúgy mukődik rá. 
@@ -66,8 +76,7 @@ public class CardStats : MonoBehaviour
         }
         isBooked = true;
         bookedBy = player;
-        player.BookCard();
-        //anim a playerhez, arany zseton a playerhez
+        player.BookCard(GetComponent<CardStats>());
     }
 
     public bool CheckPlayer(PlayerService player)
@@ -97,11 +106,83 @@ public class CardStats : MonoBehaviour
     }
 
 
-    //void onHover() ha a kurzor rajta van akkor kiírja az értékét
-
-    // Update is called once per frame
-    void Update()
+    public void MoveToPlayer(PlayerService player)
     {
         
+        switch (color)
+        {
+            case "WHI":
+                MoveTo(player.whiteCardPlacingPoints[player.whiteCardNumber]);
+                //ChangeTransform(player.whiteCardPlacingPoints[player.whiteCardNumber]);
+                break;
+            case "BLU":
+                MoveTo(player.blueCardPlacingPoints[player.blueCardNumber]);
+                //ChangeTransform(player.blueCardPlacingPoints[player.blueCardNumber]);
+                break;
+            case "GRE":
+                MoveTo(player.greenCardPlacingPoints[player.greenCardNumber]);
+                //ChangeTransform(player.greenCardPlacingPoints[player.greenCardNumber]);
+                break;
+            case "RED":
+                MoveTo(player.redCardPlacingPoints[player.redCardNumber]);
+                //ChangeTransform(player.redCardPlacingPoints[player.redCardNumber]);
+                break;
+            case "BLA":
+                MoveTo(player.blackCardPlacingPoints[player.blackCardNumber]);
+                //ChangeTransform(player.blackCardPlacingPoints[player.blackCardNumber]);
+                break;
+            default:
+                break;
+        }
+       
+        enabledToMove = true;
+    }
+
+    public void MoveToPlayerBooks(PlayerService player)
+    {
+        MoveTo(player.bookedCardPlacingPoints[player.bookedCardsNumber]);
+    }
+
+    public void MoveTo(Transform destination)
+    {
+        print("nem kértem el kec");
+        gameObject.GetComponent<Rigidbody>().useGravity = false;
+        //gameObject.GetComponent<Rigidbody>().MoveRotation(Quaternion.Euler(new Vector3(destination.rotation.eulerAngles.x, destination.rotation.eulerAngles.y, 0)));
+        ChangeTransform(destination);
+        enabledToMove = true;
+    }
+
+    public void MoveToTable(Transform destination)
+    {
+        print("elkérem kec");
+        gameObject.GetComponent<Rigidbody>().useGravity = false;
+        gameObject.GetComponent<Rigidbody>().MoveRotation(Quaternion.Euler(new Vector3(destination.rotation.eulerAngles.x, destination.rotation.eulerAngles.y, 12)));
+        ChangeTransform(destination);
+        enabledToMove = true;
+    }
+
+
+    public void ChangeTransform(Transform target)
+    {
+        targetPos = target.position;
+        targetRot = target.rotation;
+       
+    }
+
+    void Update()
+    {
+        if (enabledToMove && timer < timerEnd)
+        {
+            timer += Time.deltaTime;
+            transform.position = Vector3.Slerp(transform.position, targetPos, 2f * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, 2f * Time.deltaTime);
+            
+            if (timer > timerEnd)
+            {
+                gameObject.GetComponent<Rigidbody>().useGravity = true;
+                enabledToMove = false;
+                timer = 0;
+            }
+        }
     }
 }

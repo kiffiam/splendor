@@ -27,9 +27,7 @@ public class CameraClicking : MonoBehaviour
 
             if (Physics.Raycast(ray, out cardHit, camRayLength, cardMask))
             {
-
                 cardHit.transform.GetComponent<CardStats>().OnLeftClick(cameraMovement.GetOnTurnPlayer());
-             
             }
         }
     }
@@ -44,7 +42,6 @@ public class CameraClicking : MonoBehaviour
 
             if (Physics.Raycast(ray, out cardHit, camRayLength, cardMask))
             {
-                
                 cardHit.transform.GetComponent<CardStats>().OnRightClick(cameraMovement.GetOnTurnPlayer());
             }
         }
