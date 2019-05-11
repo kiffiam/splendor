@@ -206,6 +206,7 @@ MonoBehaviour:
   greenChipsValue: 0
   redChipsValue: 1
   blackChipsValue: 0
+  lvl: 0
   color: 
   pointValue: 0
   bookedBy: {fileID: 0}

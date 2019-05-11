@@ -21,11 +21,14 @@ public class CardStats : MonoBehaviour
 
     public bool isBooked = false;
 
+    private bool needSlerp = false;
+
     Vector3 targetPos;
     Quaternion targetRot;
     private bool enabledToMove;
     private float timer = 0;
     private float timerEnd = 3f;
+    private Rigidbody rigidbody;
 
     private void Awake()
     {
@@ -40,6 +43,9 @@ public class CardStats : MonoBehaviour
         greenChipsValue = int.Parse(name.Substring(7, 1));
         redChipsValue = int.Parse(name.Substring(8, 1));
         blackChipsValue = int.Parse(name.Substring(9, 1));
+
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.freezeRotation = true;
     }
 
     //kattintásra vagy felveszi a kártyát vagy visszautasítja a játékost
@@ -81,15 +87,21 @@ public class CardStats : MonoBehaviour
 
     public bool CheckPlayer(PlayerService player)
     {
-        if (player.whiteChips + player.whiteCardNumber >= whiteChipsValue && 
-            player.blueChips + player.blueCardNumber >= blueChipsValue &&
-            player.greenChips + player.greenCardNumber >= greenChipsValue &&
-            player.redChips + player.redCardNumber >= redChipsValue &&
-            player.blackChips + player.blackCardNumber >= blackChipsValue)
+        
+        if (player.whiteChipNumber + player.whiteCardNumber >= whiteChipsValue && 
+            player.blueChipNumber + player.blueCardNumber >= blueChipsValue &&
+            player.greenChipNumber + player.greenCardNumber >= greenChipsValue &&
+            player.redChipNumber + player.redCardNumber >= redChipsValue &&
+            player.blackChipNumber + player.blackCardNumber >= blackChipsValue)
         {
             return true;
         }
         else { return false; }
+
+        if (player.whiteChipNumber + player.whiteCardNumber <= whiteChipsValue)
+        {
+
+        }
         
     }
 
@@ -113,23 +125,18 @@ public class CardStats : MonoBehaviour
         {
             case "WHI":
                 MoveTo(player.whiteCardPlacingPoints[player.whiteCardNumber]);
-                //ChangeTransform(player.whiteCardPlacingPoints[player.whiteCardNumber]);
                 break;
             case "BLU":
                 MoveTo(player.blueCardPlacingPoints[player.blueCardNumber]);
-                //ChangeTransform(player.blueCardPlacingPoints[player.blueCardNumber]);
                 break;
             case "GRE":
                 MoveTo(player.greenCardPlacingPoints[player.greenCardNumber]);
-                //ChangeTransform(player.greenCardPlacingPoints[player.greenCardNumber]);
                 break;
             case "RED":
                 MoveTo(player.redCardPlacingPoints[player.redCardNumber]);
-                //ChangeTransform(player.redCardPlacingPoints[player.redCardNumber]);
                 break;
             case "BLA":
                 MoveTo(player.blackCardPlacingPoints[player.blackCardNumber]);
-                //ChangeTransform(player.blackCardPlacingPoints[player.blackCardNumber]);
                 break;
             default:
                 break;
@@ -147,17 +154,20 @@ public class CardStats : MonoBehaviour
     {
         print("nem kértem el kec");
         gameObject.GetComponent<Rigidbody>().useGravity = false;
-        //gameObject.GetComponent<Rigidbody>().MoveRotation(Quaternion.Euler(new Vector3(destination.rotation.eulerAngles.x, destination.rotation.eulerAngles.y, 0)));
         ChangeTransform(destination);
         enabledToMove = true;
+        needSlerp = true;
     }
 
-    public void MoveToTable(Transform destination)
+    public void MoveToTable(Transform target)
     {
         print("elkérem kec");
-        gameObject.GetComponent<Rigidbody>().useGravity = false;
-        gameObject.GetComponent<Rigidbody>().MoveRotation(Quaternion.Euler(new Vector3(destination.rotation.eulerAngles.x, destination.rotation.eulerAngles.y, 12)));
-        ChangeTransform(destination);
+        GetComponent<Rigidbody>().useGravity = false;
+
+        rigidbody.MoveRotation(Quaternion.Euler(new Vector3(target.rotation.eulerAngles.x, target.rotation.eulerAngles.y, 0)));
+        
+        ChangeTransform(target);
+
         enabledToMove = true;
     }
 
@@ -166,7 +176,6 @@ public class CardStats : MonoBehaviour
     {
         targetPos = target.position;
         targetRot = target.rotation;
-       
     }
 
     void Update()
@@ -175,12 +184,14 @@ public class CardStats : MonoBehaviour
         {
             timer += Time.deltaTime;
             transform.position = Vector3.Slerp(transform.position, targetPos, 2f * Time.deltaTime);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, 2f * Time.deltaTime);
-            
+            if (needSlerp) { 
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, 2f * Time.deltaTime);
+            }
             if (timer > timerEnd)
             {
                 gameObject.GetComponent<Rigidbody>().useGravity = true;
                 enabledToMove = false;
+                needSlerp = false;
                 timer = 0;
             }
         }

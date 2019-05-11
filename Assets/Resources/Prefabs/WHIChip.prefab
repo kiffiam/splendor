@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4073511364780581943}
   - component: {fileID: 4073511364780581936}
   - component: {fileID: 4073511364780581937}
-  - component: {fileID: 4073511364780581940}
+  - component: {fileID: 2085209546505220529}
   m_Layer: 10
-  m_Name: WHITEChip
+  m_Name: WHIChip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4073511364780581938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.295, y: 3.68, z: 1.807}
-  m_LocalScale: {x: 0.38237536, y: 0.013735545, z: 0.3823754}
+  m_LocalScale: {x: 0.38237536, y: 0.01997286, z: 0.3823754}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -110,7 +110,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4073511364780581940
+--- !u!114 &2085209546505220529
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,8 +119,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4073511364780581938}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8c420e4987152542b31b77ad189f3f1, type: 3}
+  m_Script: {fileID: 11500000, guid: baa89d7af37baff43bc3e5ac6b17ff44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stashColor: 
-  stashNumber: 0
+  color: 
+  chipStash: {fileID: 0}

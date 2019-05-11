@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7149539484833391315}
   - component: {fileID: 7149539484833391314}
   - component: {fileID: 7149539484833391313}
-  - component: {fileID: 7149539484833391318}
+  - component: {fileID: 5887272158052524199}
   m_Layer: 10
   m_Name: REDChip
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 7149539484833391312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.67, y: 3.68, z: 1.85}
-  m_LocalScale: {x: 0.38237536, y: 0.013735545, z: 0.3823754}
+  m_LocalScale: {x: 0.38237536, y: 0.01997286, z: 0.3823754}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -110,7 +110,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7149539484833391318
+--- !u!114 &5887272158052524199
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,8 +119,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7149539484833391312}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8c420e4987152542b31b77ad189f3f1, type: 3}
+  m_Script: {fileID: 11500000, guid: baa89d7af37baff43bc3e5ac6b17ff44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stashColor: 
-  stashNumber: 0
+  color: 
+  chipStash: {fileID: 0}

@@ -38,6 +38,7 @@ public class CameraMovement : MonoBehaviour
         {
             OnTurnPlayerId = 0;
         }
+        timer = 0;
 
     }
 
@@ -61,7 +62,7 @@ public class CameraMovement : MonoBehaviour
     {
         SetNextPlayerId();
         ChangeCamera(playerPovs[OnTurnPlayerId]);
-        cameraMoveEnabled = true;
+        //cameraMoveEnabled = true;
     }
 
     public void ChangeIsOutOfPov()

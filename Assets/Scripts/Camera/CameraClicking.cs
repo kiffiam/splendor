@@ -6,14 +6,14 @@ public class CameraClicking : MonoBehaviour
 {
 
     int cardMask;
-    int chipMask;
+    int chipStashMask;
     float camRayLength = 100f;
     CameraMovement cameraMovement;
 
     private void Awake()
     {
         cardMask = LayerMask.GetMask("cardMask");
-        chipMask = LayerMask.GetMask("chipMask");
+        chipStashMask = LayerMask.GetMask("chipStashMask");
         cameraMovement = gameObject.GetComponent<CameraMovement>();
     }
 
@@ -54,7 +54,7 @@ public class CameraClicking : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit chipHit;
 
-            if (Physics.Raycast(ray, out chipHit, camRayLength, chipMask))
+            if (Physics.Raycast(ray, out chipHit, camRayLength, chipStashMask))
             {
                 if (!cameraMovement.GetOnTurnPlayer().chipsTaken.Contains(chipHit.transform.GetComponent<ChipStashService>().stashColor))
                 {
@@ -76,7 +76,7 @@ public class CameraClicking : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit chipHit;
 
-            if (Physics.Raycast(ray, out chipHit, camRayLength, chipMask))
+            if (Physics.Raycast(ray, out chipHit, camRayLength, chipStashMask))
             {
                 if (chipHit.transform.GetComponent<ChipStashService>().stashColor != "GOL")
                 {
