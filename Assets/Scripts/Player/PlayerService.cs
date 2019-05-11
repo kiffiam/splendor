@@ -141,11 +141,11 @@ public class PlayerService : MonoBehaviour
             bookedCardsNumber--;
         }
 
-        whiteChipNumber = whiteChipNumber - card.whiteChipsValue;
+        /*whiteChipNumber = whiteChipNumber - card.whiteChipsValue;
         blueChipNumber = blueChipNumber - card.blueChipsValue;
         greenChipNumber = greenChipNumber - card.greenChipsValue;
         redChipNumber = redChipNumber - card.redChipsValue;
-        blackChipNumber = blackChipNumber - card.blackChipsValue;
+        blackChipNumber = blackChipNumber - card.blackChipsValue;*/
 
         PayChips(card);
 
@@ -179,31 +179,36 @@ public class PlayerService : MonoBehaviour
     public void PayChips(CardStats card)
     {
 
-
-        if (card.whiteChipsValue != 0)
+        for (int i = 0; i < card.whiteChipsValue; i++)
         {
-            chipStashes.Find(c => c.stashColor == "WHI").GetBackChipFromPlayer(whiteChips[whiteChipNumber-1]);
-            whiteChips.RemoveAt(whiteChipNumber-1);
+            chipStashes.Find(c => c.stashColor == "WHI").GetBackChipFromPlayer(whiteChips[whiteChipNumber]);
+            whiteChips.RemoveAt(whiteChipNumber);
+            whiteChipNumber--;
         }
-        if (card.blueChipsValue != 0)
+
+        for (int i = 0; i < card.blueChipsValue; i++)
         {
             chipStashes.Find(c => c.stashColor == "BLU").GetBackChipFromPlayer(blueChips[0]);
             blueChips.RemoveAt(0);
+            blueChipNumber--;
         }
-        if (card.greenChipsValue != 0)
+        for (int i = 0; i < card.greenChipsValue; i++)
         {
             chipStashes.Find(c => c.stashColor == "GRE").GetBackChipFromPlayer(greenChips[0]);
             greenChips.RemoveAt(0);
+            greenChipNumber--;
         }
-        if (card.redChipsValue != 0)
+        for (int i = 0; i < card.redChipsValue; i++)
         {
             chipStashes.Find(c => c.stashColor == "RED").GetBackChipFromPlayer(redChips[0]);
             redChips.RemoveAt(0);
+            redChipNumber--;
         }
-        if (card.blackChipsValue != 0)
+        for (int i = 0; i < card.blackChipsValue; i++)
         {
             chipStashes.Find(c => c.stashColor == "BLA").GetBackChipFromPlayer(blackChips[0]);
             blackChips.RemoveAt(0);
+            blackChipNumber--;
         }
         //missing chips paying wih golds
         /*if (missingChipsNumber>0)

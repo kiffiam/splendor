@@ -6,7 +6,7 @@ public class ChipService : MonoBehaviour
 {
     public string color;
     private float timer = 0;
-    private float timerEnd = 3f;
+    private float timerEnd = 4f;
     private bool enabledToMove = false;
 
     Vector3 targetPos;
@@ -72,7 +72,7 @@ public class ChipService : MonoBehaviour
         if (enabledToMove && timer < timerEnd)
         {
             timer += Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, 1f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, 3f * Time.deltaTime);
             //transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, 2f * Time.deltaTime);
             if (timer > timerEnd)
             {
