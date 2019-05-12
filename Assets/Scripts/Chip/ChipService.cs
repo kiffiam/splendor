@@ -54,7 +54,7 @@ public class ChipService : MonoBehaviour
 
     public void MoveTo(Transform destination)
     {
-        print("nem kértem el kec");
+        print("nem kértem el");
         gameObject.GetComponent<Rigidbody>().useGravity = false;
         ChangeTransform(destination);
         enabledToMove = true;
@@ -73,7 +73,6 @@ public class ChipService : MonoBehaviour
         {
             timer += Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, targetPos, 3f * Time.deltaTime);
-            //transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, 2f * Time.deltaTime);
             if (timer > timerEnd)
             {
                 gameObject.GetComponent<Rigidbody>().useGravity = true;

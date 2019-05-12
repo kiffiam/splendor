@@ -334,7 +334,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7b16399b3fb4fe84e8225847c32564db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -521,6 +521,7 @@ MonoBehaviour:
   - {fileID: 867254433}
   - {fileID: 1165477478}
   - {fileID: 405576003}
+  freeBookedPlaces: 
   whiteChipPlacingPoints:
   - {fileID: 1017960467}
   - {fileID: 122185652}
@@ -2983,7 +2984,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7b16399b3fb4fe84e8225847c32564db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4103,6 +4104,7 @@ MonoBehaviour:
   - {fileID: 771193360}
   - {fileID: 377310996}
   - {fileID: 1411441931}
+  freeBookedPlaces: 
   whiteChipPlacingPoints:
   - {fileID: 755102331}
   - {fileID: 444419821}
@@ -5346,7 +5348,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7b16399b3fb4fe84e8225847c32564db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8319,7 +8321,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7b16399b3fb4fe84e8225847c32564db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8519,7 +8521,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7b16399b3fb4fe84e8225847c32564db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8686,16 +8688,57 @@ MonoBehaviour:
   - {fileID: 449155816}
   - {fileID: 1417785242}
   - {fileID: 716416676}
-  whiteCardPlacingPoints: []
-  blueCardPlacingPoints: []
-  greenCardPlacingPoints: []
-  redCardPlacingPoints: []
-  blackCardPlacingPoints: []
+  whiteCardPlacingPoints:
+  - {fileID: 1008442211}
+  - {fileID: 93198445}
+  - {fileID: 1906092866}
+  - {fileID: 351683445}
+  - {fileID: 1128728713}
+  - {fileID: 1292418048}
+  - {fileID: 977569457}
+  - {fileID: 550363687}
+  blueCardPlacingPoints:
+  - {fileID: 1292296620}
+  - {fileID: 750858865}
+  - {fileID: 821798117}
+  - {fileID: 364880748}
+  - {fileID: 987237435}
+  - {fileID: 1672018803}
+  - {fileID: 1558365373}
+  - {fileID: 641686457}
+  greenCardPlacingPoints:
+  - {fileID: 413273477}
+  - {fileID: 2057689232}
+  - {fileID: 742544587}
+  - {fileID: 1875264863}
+  - {fileID: 610285476}
+  - {fileID: 493670482}
+  - {fileID: 1597260757}
+  - {fileID: 754607208}
+  redCardPlacingPoints:
+  - {fileID: 439367711}
+  - {fileID: 1256677094}
+  - {fileID: 1220093894}
+  - {fileID: 493239788}
+  - {fileID: 745648592}
+  - {fileID: 1389680592}
+  - {fileID: 626328686}
+  - {fileID: 428247833}
+  blackCardPlacingPoints:
+  - {fileID: 272162120}
+  - {fileID: 1860717786}
+  - {fileID: 1067979185}
+  - {fileID: 2044200536}
+  - {fileID: 119374980}
+  - {fileID: 409315716}
+  - {fileID: 55159509}
+  - {fileID: 2002707497}
   bookedCardPlacingPoints:
   - {fileID: 1938643775}
   - {fileID: 1502816265}
   - {fileID: 736148789}
   - {fileID: 1354321904}
+  freeBookedPlaces: 
   whiteChipPlacingPoints:
   - {fileID: 486903675}
   - {fileID: 733893073}
@@ -12975,16 +13018,57 @@ MonoBehaviour:
   - {fileID: 624989587}
   - {fileID: 978719305}
   - {fileID: 412098343}
-  whiteCardPlacingPoints: []
-  blueCardPlacingPoints: []
-  greenCardPlacingPoints: []
-  redCardPlacingPoints: []
-  blackCardPlacingPoints: []
+  whiteCardPlacingPoints:
+  - {fileID: 303632587}
+  - {fileID: 1308698114}
+  - {fileID: 1455399477}
+  - {fileID: 1708301288}
+  - {fileID: 2069013333}
+  - {fileID: 1880502675}
+  - {fileID: 45676652}
+  - {fileID: 624064064}
+  blueCardPlacingPoints:
+  - {fileID: 150760604}
+  - {fileID: 604447151}
+  - {fileID: 1720066592}
+  - {fileID: 1009432066}
+  - {fileID: 1586753014}
+  - {fileID: 493940771}
+  - {fileID: 1086967744}
+  - {fileID: 1880248858}
+  greenCardPlacingPoints:
+  - {fileID: 1848895713}
+  - {fileID: 524851664}
+  - {fileID: 2134426185}
+  - {fileID: 1237940100}
+  - {fileID: 206003490}
+  - {fileID: 1445626013}
+  - {fileID: 1360932244}
+  - {fileID: 1486988997}
+  redCardPlacingPoints:
+  - {fileID: 563178951}
+  - {fileID: 2116842605}
+  - {fileID: 1668391083}
+  - {fileID: 2017086372}
+  - {fileID: 1414042167}
+  - {fileID: 257123010}
+  - {fileID: 964885832}
+  - {fileID: 1835147401}
+  blackCardPlacingPoints:
+  - {fileID: 529216612}
+  - {fileID: 278076960}
+  - {fileID: 344426258}
+  - {fileID: 1642008882}
+  - {fileID: 546271711}
+  - {fileID: 289885490}
+  - {fileID: 1768477584}
+  - {fileID: 580635158}
   bookedCardPlacingPoints:
   - {fileID: 216258482}
   - {fileID: 721835639}
   - {fileID: 1962007034}
   - {fileID: 647456049}
+  freeBookedPlaces: 
   whiteChipPlacingPoints:
   - {fileID: 1494914631}
   - {fileID: 1430773268}
@@ -14935,7 +15019,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7b16399b3fb4fe84e8225847c32564db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

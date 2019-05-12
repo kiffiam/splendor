@@ -11,6 +11,8 @@ public class CardStats : MonoBehaviour
     public int redChipsValue;
     public int blackChipsValue;
 
+    private int goldChipsToUse = 0;
+
     public int lvl;
 
     public string color;
@@ -29,6 +31,8 @@ public class CardStats : MonoBehaviour
     private float timer = 0;
     private float timerEnd = 3f;
     private Rigidbody rigidbody;
+
+    public int cardInBookingPlaceNumber;
 
     private void Awake()
     {
@@ -87,8 +91,9 @@ public class CardStats : MonoBehaviour
 
     public bool CheckPlayer(PlayerService player)
     {
+        int remainingGoldChips = player.goldChipNumber;
         
-        if (player.whiteChipNumber + player.whiteCardNumber >= whiteChipsValue && 
+        /*if (player.whiteChipNumber + player.whiteCardNumber >= whiteChipsValue && 
             player.blueChipNumber + player.blueCardNumber >= blueChipsValue &&
             player.greenChipNumber + player.greenCardNumber >= greenChipsValue &&
             player.redChipNumber + player.redCardNumber >= redChipsValue &&
@@ -96,13 +101,67 @@ public class CardStats : MonoBehaviour
         {
             return true;
         }
-        else { return false; }
+        else { return false; }*/
 
-        if (player.whiteChipNumber + player.whiteCardNumber <= whiteChipsValue)
+        if (player.whiteChipNumber + player.whiteCardNumber < whiteChipsValue)
         {
-
+            if (remainingGoldChips + player.whiteChipNumber + player.whiteCardNumber < whiteChipsValue)
+            {
+                return false;
+            }
+            else
+            {
+                remainingGoldChips -= whiteChipsValue - player.whiteCardNumber - player.whiteChipNumber;
+            }
         }
-        
+        if (player.blueChipNumber + player.blueCardNumber < blueChipsValue)
+        {
+            if (remainingGoldChips + player.blueChipNumber + player.blueCardNumber < blueChipsValue)
+            {
+                return false;
+            }
+            else
+            {
+                remainingGoldChips -= blueChipsValue - player.blueCardNumber - player.blueChipNumber;
+            }
+        }
+        if (player.greenChipNumber + player.greenCardNumber < greenChipsValue)
+        {
+            if (remainingGoldChips + player.greenChipNumber + player.greenCardNumber < greenChipsValue)
+            {
+                return false;
+            }
+            else
+            {
+                remainingGoldChips -= greenChipsValue - player.greenCardNumber - player.greenChipNumber;
+            }
+        }
+        if (player.redChipNumber + player.redCardNumber < redChipsValue)
+        {
+            if (remainingGoldChips + player.redChipNumber + player.redCardNumber < redChipsValue)
+            {
+                return false;
+            }
+            else
+            {
+                remainingGoldChips -= redChipsValue - player.redCardNumber - player.redChipNumber;
+            }
+        }
+        if (player.blackChipNumber + player.blackCardNumber < blackChipsValue)
+        {
+            if (remainingGoldChips + player.blackChipNumber + player.blackCardNumber < blackChipsValue)
+            {
+                return false;
+            }
+            else
+            {
+                remainingGoldChips -= blackChipsValue - player.blackCardNumber - player.blackChipNumber;
+            }
+        }
+
+        //goldChipsToUse = player.goldChipNumber - remainingGoldChips;
+
+        return true;
     }
 
     public bool isPlayerBookedMe(PlayerService player)
@@ -147,7 +206,10 @@ public class CardStats : MonoBehaviour
 
     public void MoveToPlayerBooks(PlayerService player)
     {
-        MoveTo(player.bookedCardPlacingPoints[player.bookedCardsNumber]);
+        cardInBookingPlaceNumber = player.freeBookedPlaces.IndexOf(player.freeBookedPlaces.Find(f => f == true));
+        MoveTo(player.bookedCardPlacingPoints[cardInBookingPlaceNumber]);
+        player.freeBookedPlaces[cardInBookingPlaceNumber] = false;
+        
     }
 
     public void MoveTo(Transform destination)
