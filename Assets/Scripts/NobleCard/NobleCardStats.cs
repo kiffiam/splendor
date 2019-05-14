@@ -54,6 +54,7 @@ public class NobleCardStats : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().useGravity = false;
         targetPlayerPos = player.nobleCardPlacingPoints[player.nobleCards].position;
         targetPlayerRot = player.nobleCardPlacingPoints[player.nobleCards].rotation;
+        gameObject.GetComponent<AudioSource>().Play();
         enabledToMove = true;
     }
 

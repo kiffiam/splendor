@@ -9,9 +9,11 @@ public class CameraClicking : MonoBehaviour
     int chipStashMask;
     float camRayLength = 100f;
     CameraMovement cameraMovement;
+    ChipTextManager chipTextManager;
 
     private void Awake()
     {
+        chipTextManager = GetComponent<ChipTextManager>();
         cardMask = LayerMask.GetMask("cardMask");
         chipStashMask = LayerMask.GetMask("chipStashMask");
         cameraMovement = gameObject.GetComponent<CameraMovement>();
@@ -28,6 +30,7 @@ public class CameraClicking : MonoBehaviour
             if (Physics.Raycast(ray, out cardHit, camRayLength, cardMask))
             {
                 cardHit.transform.GetComponent<CardStats>().OnLeftClick(cameraMovement.GetOnTurnPlayer());
+                //chipTextManager.UpdatePlayer(cameraMovement.GetOnTurnPlayer());
             }
         }
     }
@@ -43,6 +46,7 @@ public class CameraClicking : MonoBehaviour
             if (Physics.Raycast(ray, out cardHit, camRayLength, cardMask))
             {
                 cardHit.transform.GetComponent<CardStats>().OnRightClick(cameraMovement.GetOnTurnPlayer());
+                //chipTextManager.UpdatePlayer(cameraMovement.GetOnTurnPlayer());
             }
         }
     }
@@ -59,6 +63,7 @@ public class CameraClicking : MonoBehaviour
                 if (!cameraMovement.GetOnTurnPlayer().chipsTaken.Contains(chipHit.transform.GetComponent<ChipStashService>().stashColor))
                 {
                     chipHit.transform.GetComponent<ChipStashService>().OnLeftClick(cameraMovement.GetOnTurnPlayer());
+                    //chipTextManager.UpdatePlayer(cameraMovement.GetOnTurnPlayer());
                 }
                 else
                 {
@@ -81,19 +86,21 @@ public class CameraClicking : MonoBehaviour
                 if (chipHit.transform.GetComponent<ChipStashService>().stashColor != "GOL")
                 {
                     chipHit.transform.GetComponent<ChipStashService>().OnRigthClick(cameraMovement.GetOnTurnPlayer());
+                    //chipTextManager.UpdatePlayer(cameraMovement.GetOnTurnPlayer());
                 }
                 else
                 {
                     print("Can't take two from the Gold chips! Book a card with right click to get one!");
                 }
             }
-            
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (cameraMovement.lastCounter != 0)
+        {
         OnCardLeftClick();
 
         OnCardRightClick();
@@ -101,5 +108,7 @@ public class CameraClicking : MonoBehaviour
         OnChipLeftClick();
 
         OnChipRightClick();
+        }
+       
     }
 }

@@ -67,11 +67,11 @@ public class PlayerService : MonoBehaviour
 
     public bool pickingChips = false;
 
-
+    ChipTextManager chipTextManager;
 
     private void Awake()
     {
-
+        chipTextManager = FindObjectOfType<ChipTextManager>();
         cameraMovement = Camera.main.GetComponent<CameraMovement>();
 
         goldChips = new List<GameObject>();
@@ -111,6 +111,8 @@ public class PlayerService : MonoBehaviour
 
     public void EndTurn()
     {
+        
+        chipTextManager.UpdatePlayer(this.name);
         chipsToTake = 3;
         chipsTaken.Clear();
         isOnTurn = false;
@@ -351,5 +353,11 @@ public class PlayerService : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public int CardNumber()
+    {
+        int cardNumber = whiteCardNumber + blueCardNumber + greenCardNumber + redCardNumber + blackCardNumber;
+        return cardNumber;
     }
 }

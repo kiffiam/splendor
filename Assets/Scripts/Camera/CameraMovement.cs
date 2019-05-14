@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
+    public bool isLastRound = false;
+    public int lastCounter = 4;
 
     public int OnTurnPlayerId = 0;
 
-    public GameObject[] players;
-
-    private Animator cameraAnimationAC { get; set; }
+    public List<GameObject> players;
 
     private float smoothing = 1.5f;
 
     public Transform[] playerPovs;
 
+    
+
     public Transform CardsPov;
     public Transform NoblePov;
     public Transform ChipStashPov;
     
-
     Vector3 targetCamPos;
     Quaternion targetCamRot;
 
@@ -47,6 +48,7 @@ public class CameraMovement : MonoBehaviour
     {
         targetCamPos = transform.position;
         targetCamRot = transform.rotation;
+        timer = 0;
         cameraMoveEnabled = true;
     }
 
@@ -55,82 +57,51 @@ public class CameraMovement : MonoBehaviour
     public PlayerService GetOnTurnPlayer()
     {
         return players[OnTurnPlayerId].GetComponent<PlayerService>();
-        
     }
 
     public void MoveToNextPlayer()
     {
+        if (GetOnTurnPlayer().points >= 15)
+        {
+            isLastRound = true;
+        }
+
+        if (isLastRound && lastCounter != 0)
+        {
+            lastCounter--;
+        }
+
+        if (lastCounter != 0)
+        {
         SetNextPlayerId();
         ChangeCamera(playerPovs[OnTurnPlayerId]);
-        //cameraMoveEnabled = true;
-    }
-
-    public void ChangeIsOutOfPov()
-    {
-        if (isOutOfPov)
-        {
-            isOutOfPov = false;
-        }
-        if (!isOutOfPov)
-        {
-            isOutOfPov = true;
         }
     }
-
-    
 
     public void LookAtCards()
     {
-        if (Input.GetKeyDown(KeyCode.A) && !isOutOfPov)
+        if (Input.GetKeyDown(KeyCode.A))
         {
             ChangeCamera(CardsPov);
-            //cameraMoveEnabled = true;
             isOutOfPov = true;
-            
-            
-        }
-        else if (Input.GetKeyDown(KeyCode.A) && isOutOfPov)
-        {
-            print("cards");
-            ChangeCamera(playerPovs[OnTurnPlayerId]);
-            //cameraMoveEnabled = true;
-            isOutOfPov = false;
         }
     }
 
     public void LookAtNobles()
     {
-        if (Input.GetKeyDown(KeyCode.S) && !isOutOfPov)
+        if (Input.GetKeyDown(KeyCode.S))
         {
             ChangeCamera(NoblePov);
-            //cameraMoveEnabled = true;
             isOutOfPov = true;
-
-        }
-        else if (Input.GetKeyDown(KeyCode.S) && isOutOfPov)
-        {
-            print("noble");
-            ChangeCamera(playerPovs[OnTurnPlayerId]);
-            //cameraMoveEnabled = true;
-            isOutOfPov = false;
         }
     }
 
     public void LookAtChips()
     {
-        if (Input.GetKeyDown(KeyCode.D) && !isOutOfPov)
+        if (Input.GetKeyDown(KeyCode.D))
         {
             ChangeCamera(ChipStashPov);
-            //cameraMoveEnabled = true;
             isOutOfPov = true;
-
-        }
-        else if (Input.GetKeyDown(KeyCode.D) && isOutOfPov)
-        {
-            print("chips");
-            ChangeCamera(playerPovs[OnTurnPlayerId]);
-            //cameraMoveEnabled = true;
-            isOutOfPov = false;
         }
     }
 
@@ -139,11 +110,8 @@ public class CameraMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             ChangeCamera(playerPovs[OnTurnPlayerId]);
-            //cameraMoveEnabled = true;
             isOutOfPov = false;
-
         }
-        
     }
 
     public void LookAtOthers()
@@ -165,7 +133,6 @@ public class CameraMovement : MonoBehaviour
                     ChangeCamera(playerPovs[1]);
                     break;
             }
-            //cameraMoveEnabled = true;
             isOutOfPov = true;
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -185,7 +152,6 @@ public class CameraMovement : MonoBehaviour
                     ChangeCamera(playerPovs[0]);
                     break;
             }
-            //cameraMoveEnabled = true;
             isOutOfPov = true;
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -205,7 +171,6 @@ public class CameraMovement : MonoBehaviour
                     ChangeCamera(playerPovs[2]);
                     break;
             }
-            //cameraMoveEnabled = true;
             isOutOfPov = true;
         }
     }
@@ -297,10 +262,7 @@ public class CameraMovement : MonoBehaviour
 
     private void Awake()
     {
-        cameraAnimationAC = gameObject.GetComponent<Animator>();
-        //targetCamPos = playerPovs[OnTurnPlayerId].transform.position;
-        //targetCamRot = playerPovs[OnTurnPlayerId].transform.rotation;
-        //cameraMoveEnabled = true;
+
     }
     
     
@@ -321,7 +283,7 @@ public class CameraMovement : MonoBehaviour
         if (cameraMoveEnabled)
         {
             timer += Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
+            transform.position = Vector3.Slerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetCamRot, smoothing * Time.deltaTime);
 
             if (timer > 6f)

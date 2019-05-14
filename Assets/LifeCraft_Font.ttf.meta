@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ac1893eebd170f24899f1d0303822f1c
+timeCreated: 1510846750
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: LifeCraft
+  fontNames:
+  - LifeCraft
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
