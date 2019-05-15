@@ -111,7 +111,6 @@ public class PlayerService : MonoBehaviour
 
     public void EndTurn()
     {
-        
         chipTextManager.UpdatePlayer(this.name);
         chipsToTake = 3;
         chipsTaken.Clear();
