@@ -47,12 +47,7 @@ public class CardManager : MonoBehaviour
             default:
                 break;
         }
-        /*if (cardStashes[lvl].cardsInStash.Count>=1)
-
-        {
-            cardStashes[lvl].cardsInStash[0].GetComponent<CardStats>().MoveToTable(card.transform);
-            cardStashes[lvl].cardsInStash.RemoveAt(0);
-        }*/
+        
         
     }
 

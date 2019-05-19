@@ -89,7 +89,7 @@ public class PlayerService : MonoBehaviour
 
         nobleCardStash = (NobleCardStash)FindObjectOfType(typeof(NobleCardStash));
 
-        whiteChipNumber = 0; //for testing
+        whiteChipNumber = 0;
         blueChipNumber = 0;
         greenChipNumber = 0;
         redChipNumber = 0;
@@ -183,7 +183,7 @@ public class PlayerService : MonoBehaviour
     public void PayChips(CardStats card)
     {
 
-        for (int i = 0; i < card.whiteChipsValue; i++)
+        for (int i = 0; i < card.whiteChipsValue-whiteCardNumber; i++)
         {
             if (whiteChips.Count != 0)
             {
@@ -198,7 +198,7 @@ public class PlayerService : MonoBehaviour
                 goldChipNumber--;
             }
         }
-        for (int i = 0; i < card.blueChipsValue; i++)
+        for (int i = 0; i < card.blueChipsValue-blueCardNumber; i++)
         {
             if (blueChips.Count != 0)
             {
@@ -213,7 +213,7 @@ public class PlayerService : MonoBehaviour
                 goldChipNumber--;
             }
         }
-        for (int i = 0; i < card.greenChipsValue; i++)
+        for (int i = 0; i < card.greenChipsValue-greenCardNumber; i++)
         {
             if (greenChips.Count != 0)
             {
@@ -228,7 +228,7 @@ public class PlayerService : MonoBehaviour
                 goldChipNumber--;
             }
         }
-        for (int i = 0; i < card.redChipsValue; i++)
+        for (int i = 0; i < card.redChipsValue-redCardNumber; i++)
         {
             if (redChips.Count != 0)
             {
@@ -243,7 +243,7 @@ public class PlayerService : MonoBehaviour
                 goldChipNumber--;
             }
         }
-        for (int i = 0; i < card.blackChipsValue; i++)
+        for (int i = 0; i < card.blackChipsValue-blackCardNumber; i++)
         {
             if (blackChips.Count != 0)
             {

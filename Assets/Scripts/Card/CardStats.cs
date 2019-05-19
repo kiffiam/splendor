@@ -92,16 +92,7 @@ public class CardStats : MonoBehaviour
     public bool CheckPlayer(PlayerService player)
     {
         int remainingGoldChips = player.goldChipNumber;
-        
-        /*if (player.whiteChipNumber + player.whiteCardNumber >= whiteChipsValue && 
-            player.blueChipNumber + player.blueCardNumber >= blueChipsValue &&
-            player.greenChipNumber + player.greenCardNumber >= greenChipsValue &&
-            player.redChipNumber + player.redCardNumber >= redChipsValue &&
-            player.blackChipNumber + player.blackCardNumber >= blackChipsValue)
-        {
-            return true;
-        }
-        else { return false; }*/
+
 
         if (player.whiteChipNumber + player.whiteCardNumber < whiteChipsValue)
         {
@@ -159,8 +150,6 @@ public class CardStats : MonoBehaviour
             }
         }
 
-        //goldChipsToUse = player.goldChipNumber - remainingGoldChips;
-
         return true;
     }
 
@@ -179,7 +168,6 @@ public class CardStats : MonoBehaviour
 
     public void MoveToPlayer(PlayerService player)
     {
-        
         switch (color)
         {
             case "WHI":
@@ -214,7 +202,6 @@ public class CardStats : MonoBehaviour
 
     public void MoveTo(Transform destination)
     {
-        print("nem kértem el kec");
         gameObject.GetComponent<Rigidbody>().useGravity = false;
         ChangeTransform(destination);
         enabledToMove = true;
@@ -223,7 +210,6 @@ public class CardStats : MonoBehaviour
 
     public void MoveToTable(Transform target)
     {
-        print("elkérem kec");
         GetComponent<Rigidbody>().useGravity = false;
 
         rigidbody.MoveRotation(Quaternion.Euler(new Vector3(target.rotation.eulerAngles.x, target.rotation.eulerAngles.y, 0)));

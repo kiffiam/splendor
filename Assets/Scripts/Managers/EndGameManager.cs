@@ -39,7 +39,6 @@ public class EndGameManager : MonoBehaviour
 
     private void Awake()
     {
-        winnerPlayerText = GetComponent<Text>();
     }
 
     // Update is called once per frame
